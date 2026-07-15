@@ -1,0 +1,237 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: #0a0a0f;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---- Gallery ---- */
+
+.gallery {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(28px, 6vh, 64px) clamp(18px, 4vw, 48px) 64px;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: clamp(28px, 5vh, 56px);
+}
+
+.gallery-kicker {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: clamp(11px, 1.4vw, 14px);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  margin-bottom: 14px;
+}
+
+.gallery-title {
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(40px, 7vw, 72px);
+  line-height: 1.05;
+  color: #c9a84c;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 0 40px rgba(201, 168, 76, 0.08);
+}
+
+.gallery-rule {
+  width: 80px;
+  height: 1px;
+  margin: 18px auto 0;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), transparent);
+}
+
+.gallery-sub {
+  margin-top: 14px;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(16px, 2.2vw, 21px);
+  color: rgba(201, 168, 76, 0.45);
+}
+
+.group-label {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: clamp(11px, 1.4vw, 13px);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.55);
+  margin: clamp(28px, 4vh, 44px) 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.group-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201, 168, 76, 0.18), transparent);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  padding: 20px 22px;
+  background: linear-gradient(160deg, rgba(201, 168, 76, 0.07), rgba(201, 168, 76, 0.02) 55%, rgba(0, 0, 0, 0.25));
+  border: 1px solid rgba(201, 168, 76, 0.16);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.card:hover {
+  border-color: rgba(201, 168, 76, 0.45);
+  transform: translateY(-3px);
+}
+
+.card-num {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(201, 168, 76, 0.14);
+  line-height: 1;
+}
+
+.card-title {
+  font-size: clamp(23px, 2.6vw, 28px);
+  font-weight: 400;
+  font-style: italic;
+  color: #e8dcc4;
+  line-height: 1.15;
+}
+
+.card-sub {
+  margin-top: 7px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.45;
+}
+
+.gallery-footer {
+  margin-top: clamp(40px, 7vh, 72px);
+  padding-top: 22px;
+  border-top: 1px solid rgba(201, 168, 76, 0.1);
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.gallery-footer a:hover {
+  color: rgba(201, 168, 76, 0.7);
+}
+
+/* ---- Poster view ---- */
+
+.poster-stage {
+  min-height: 100vh;
+  background: #0a0a0f;
+}
+
+.back-btn {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 12px;
+  border-radius: 999px;
+  background: rgba(10, 10, 15, 0.55);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  backdrop-filter: blur(6px);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(232, 220, 196, 0.85);
+  opacity: 0.75;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.back-btn:hover {
+  opacity: 1;
+  border-color: rgba(201, 168, 76, 0.6);
+}
+
+.poster-loading {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.poster-loading-title {
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(26px, 4vw, 40px);
+  color: rgba(201, 168, 76, 0.7);
+}
+
+.poster-loading-note {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-top-color: rgba(201, 168, 76, 0.8);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
