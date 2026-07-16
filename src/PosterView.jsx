@@ -447,6 +447,15 @@ export default function PosterView() {
   const { Component } = poster;
   return (
     <div className="poster-stage" ref={stageRef}>
+      {!coarse && poster.slug !== posters[0].slug && (
+        <button
+          className="framework-pill"
+          aria-label="Return to the framework map"
+          onClick={() => window.__lvNav?.home?.()}
+        >
+          <span aria-hidden="true">&larr;</span> Framework
+        </button>
+      )}
       <button
         className="deck-arrow deck-prev"
         aria-label="Previous poster"
