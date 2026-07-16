@@ -188,47 +188,63 @@ a {
   }
 }
 
-.back-btn {
+/* gestures: vertical scroll stays native; horizontal swipes are ours.
+   long-press shouldn't select poster text. */
+.poster-stage {
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* faint edge arrows for mouse users — touch users swipe */
+.deck-arrow {
   position: fixed;
-  top: 14px;
-  left: 14px;
-  z-index: 50;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px 8px 12px;
-  border-radius: 999px;
-  background: rgba(10, 10, 15, 0.55);
-  border: 1px solid rgba(201, 168, 76, 0.3);
-  backdrop-filter: blur(6px);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(232, 220, 196, 0.85);
-  opacity: 0.75;
-  transition: opacity 0.2s ease, border-color 0.2s ease;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 60;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 22px 10px;
+  font-family: Georgia, serif;
+  font-size: 40px;
+  line-height: 1;
+  color: rgba(201, 168, 76, 0.8);
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+  user-select: none;
 }
 
-.back-btn:hover {
-  opacity: 1;
-  border-color: rgba(201, 168, 76, 0.6);
+.deck-arrow:hover {
+  opacity: 0.95;
 }
 
-/* On phones the pill sits on top of the poster art — keep it tiny and
-   unobtrusive */
-@media (max-width: 820px), (pointer: coarse) and (max-height: 620px) {
-  .back-btn {
-    top: 8px;
-    left: 8px;
-    padding: 4px 10px 4px 8px;
-    gap: 5px;
-    font-size: 9.5px;
-    letter-spacing: 0.12em;
-    background: rgba(10, 10, 15, 0.4);
-    border-color: rgba(201, 168, 76, 0.22);
-    opacity: 0.55 !important;
+.deck-prev {
+  left: 2px;
+}
+
+.deck-next {
+  right: 2px;
+}
+
+@media (pointer: coarse) {
+  .deck-arrow {
+    display: none;
+  }
+}
+
+/* gentle cross-fade when the slide changes */
+.slide-fade {
+  animation: slidefade 0.35s ease;
+}
+
+@keyframes slidefade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

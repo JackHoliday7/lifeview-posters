@@ -113,6 +113,29 @@ const ANCHOR_TEXT = {
   victory:       'Every week, acknowledge how far you\u2019ve come. Honor milestones big and small. Celebrate with joy, rest when needed, and rise again.',
 };
 
+// Which poster each framework anchor belongs to — long-pressing an item
+// jumps the deck (window.top.__lvNav is provided by the site's PosterView;
+// harmless no-op when the poster runs standalone). Toolkit item ids are
+// already the poster slugs.
+const ANCHOR_POSTER = {
+  personal: 'three-healings',
+  interpersonal: 'three-healings',
+  societal: 'three-healings',
+  source: 'source-vs-control',
+  control: 'source-vs-control',
+  align: 'quiet-the-ego',
+  inner: 'heal-the-inner-child',
+  higher: 'awaken-the-higher-self',
+  soul: 'connect-to-soul',
+  hear: 'heros-journey',
+  commit: 'heros-journey',
+  progress: 'heros-journey',
+  train: 'heros-journey',
+  gifts: 'heros-journey',
+  souls: 'heros-journey',
+  victory: 'heros-journey',
+};
+
 function Lines({ leftRefs, rightRefs, containerRef, dividerRef, opacity, thickness, activeAnchor }) {
   const canvasRef = useRef(null);
 
@@ -237,12 +260,35 @@ export default function LifeViewMaster() {
     document.head.appendChild(l);
   }, []);
 
+  // long-press on an item jumps the deck to its poster (tap keeps the
+  // highlight behavior). One shared timer — only one press at a time.
+  const lpState = useRef({});
+  const longPress = (slug) => {
+    if (!slug) return {};
+    const s = lpState.current;
+    const clear = () => clearTimeout(s.t);
+    return {
+      onPointerDown: (e) => {
+        s.x = e.clientX; s.y = e.clientY;
+        clear();
+        s.t = setTimeout(() => { window.top.__lvNav?.jump?.(slug); }, 550);
+      },
+      onPointerMove: (e) => {
+        if (Math.abs(e.clientX - s.x) > 12 || Math.abs(e.clientY - s.y) > 12) clear();
+      },
+      onPointerUp: clear,
+      onPointerLeave: clear,
+      onPointerCancel: clear,
+    };
+  };
+
   const Step = ({ id, label, dotColor = gold, right = false }) => {
     const isActive = activeAnchor === id;
     const isClickable = id && ANCHORS.includes(id);
     return (
       <div
         ref={id ? el => leftRefs.current[id] = el : undefined}
+        {...longPress(id && ANCHOR_POSTER[id])}
         onClick={isClickable ? () => { setActiveAnchor(id); setPlaying(false); anchorIdx.current = ANCHORS.indexOf(id); } : undefined}
         style={{ display: 'flex', alignItems: 'center', gap: 0, marginBottom: '0.15vh',
           flexDirection: 'row-reverse',
@@ -351,6 +397,7 @@ export default function LifeViewMaster() {
               <div
                 key={item.id}
                 ref={el => rightRefs.current[item.id] = el}
+                {...longPress(item.id)}
                 style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8vw', padding: '0', flex: 1, alignItems: 'center',
                   borderBottom: idx < toolkitItems.length - 1 ? `1px solid ${goldFaint}` : 'none',
                   transition: 'opacity 0.4s ease',
