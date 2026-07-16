@@ -368,7 +368,7 @@ export default function LifeViewMaster() {
 
       {/* SCRIPT PANEL */}
       <div style={{ width: '100%', padding: '0 4vw', boxSizing: 'border-box', flexShrink: 0 }}>
-        <div style={{ borderTop: `1px solid ${goldBorder}`, borderBottom: `1px solid ${goldBorder}`, padding: '0.8vh 3.7vw', height: '5.5vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+        <div style={{ borderTop: `1px solid ${goldBorder}`, borderBottom: `1px solid ${goldBorder}`, padding: '0.8vh 3.7vw', minHeight: '5.5vh', boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: 'clamp(12px, 1.6vw, 22px)', fontWeight: 300, color: cream, lineHeight: 1.6, textAlign: 'center', margin: 0 }}>
             {ANCHOR_TEXT[activeAnchor]}
           </p>
