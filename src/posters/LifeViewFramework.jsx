@@ -289,6 +289,7 @@ export default function LifeViewMaster() {
       <div
         ref={id ? el => leftRefs.current[id] = el : undefined}
         {...longPress(id && ANCHOR_POSTER[id])}
+        onDoubleClick={id && ANCHOR_POSTER[id] ? () => window.top.__lvNav?.jump?.(ANCHOR_POSTER[id]) : undefined}
         onClick={isClickable ? () => { setActiveAnchor(id); setActiveTargets(connections.filter(c => c.from === id).map(c => c.to)); setPlaying(false); anchorIdx.current = ANCHORS.indexOf(id); } : undefined}
         style={{ display: 'flex', alignItems: 'center', gap: 0, marginBottom: '0.15vh',
           flexDirection: 'row-reverse',
@@ -398,6 +399,7 @@ export default function LifeViewMaster() {
                 key={item.id}
                 ref={el => rightRefs.current[item.id] = el}
                 {...longPress(item.id)}
+                onDoubleClick={() => window.top.__lvNav?.jump?.(item.id)}
                 style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8vw', padding: '0', flex: 1, alignItems: 'center',
                   borderBottom: idx < toolkitItems.length - 1 ? `1px solid ${goldFaint}` : 'none',
                   transition: 'opacity 0.4s ease',

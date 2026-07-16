@@ -483,7 +483,9 @@ export default function PosterView() {
               Press and hold any poster to return to the framework map
             </div>
             <div className="deck-hint-row">
-              On the map, press and hold any item to open its poster
+              {coarse
+                ? "On the map, press and hold any item to open its poster"
+                : "On the map, double-click (or press and hold) any item to open its poster"}
             </div>
             <button className="deck-hint-btn" onClick={dismissHint}>
               Got it
