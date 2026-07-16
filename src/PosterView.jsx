@@ -23,6 +23,7 @@ import { findPoster, posters } from "./posters.js";
 const DESIGN_W = 1080;
 const DESIGN_H = 1920;
 const FLOW_W = 420; // layout width of the readable "flow" rendering
+const MAX_FLOW_SCALE = 1.9; // cap magnification so wide-ish windows don't get clown-sized type
 
 // Union of every Google Font family used across the 16 posters. The iframe is
 // a separate document, so it needs its own font links (the posters' own
@@ -257,9 +258,11 @@ function PortraitFrame({ poster, w, h }) {
 function FlowFrame({ poster, w }) {
   const iframeRef = useRef(null);
   const [contentH, setContentH] = useState(600);
-  // never lay out wider than the screen (windows narrower than FLOW_W just
-  // get the plain phone rendering, unmagnified)
-  const layoutW = Math.min(w, FLOW_W);
+  // lay out at phone width and magnify to fill the screen, but cap the
+  // magnification — on wider windows the layout column widens instead of the
+  // type growing without bound. Never lay out wider than the screen itself
+  // (windows narrower than FLOW_W get the plain phone rendering, unmagnified).
+  const layoutW = Math.min(w, Math.max(FLOW_W, Math.round(w / MAX_FLOW_SCALE)));
   const scale = w / layoutW;
 
   usePosterFrame(
