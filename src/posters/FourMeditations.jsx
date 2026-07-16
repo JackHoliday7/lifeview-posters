@@ -79,7 +79,7 @@ export default function FourMeditations() {
       </div>
 
       {/* Four Meditation entries */}
-      <div style={{ flex: 1, position: "relative", zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "space-evenly", margin: "clamp(8px, 1.5vh, 18px) 0" }}>
+      <div style={{ flex: 1, position: "relative", zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "space-evenly", gap: "clamp(12px, 1.6vh, 28px)", margin: "clamp(8px, 1.5vh, 18px) 0" }}>
         {meditations.map((m, i) => {
           const isLeft = i % 2 === 0;
           return (
@@ -108,7 +108,9 @@ export default function FourMeditations() {
             <div style={{ fontSize: "clamp(13px, 1.8vw, 20px)", color: "rgba(201,168,76,0.4)", fontWeight: 300 }}>Chi Energy Activation &amp; Clearing</div>
             <div style={{ fontSize: "clamp(13px, 1.8vw, 20px)", color: "rgba(201,168,76,0.35)", fontWeight: 300 }}>Bill Farr</div>
             <div style={{ fontSize: "clamp(12px, 1.6vw, 18px)", color: "rgba(255,255,255,0.25)", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 300, marginTop: "clamp(3px, 0.5vh, 8px)" }}>Four guided sessions &middot; $30 &middot; Use forever</div>
-            <div style={{ fontSize: "clamp(11px, 1.5vw, 16px)", color: "rgba(140,168,104,0.5)", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 300, marginTop: "clamp(2px, 0.3vh, 4px)", letterSpacing: "0.03em" }}>billfarr.com/product/higherpower-meditations</div>
+            <div style={{ fontSize: "clamp(11px, 1.5vw, 16px)", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 300, marginTop: "clamp(2px, 0.3vh, 4px)", letterSpacing: "0.03em" }}>
+              <a href="https://www.billfarr.com/product/higherpower-meditations" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(140,168,104,0.75)", textDecoration: "underline", textUnderlineOffset: "3px", cursor: "pointer" }}>billfarr.com/product/higherpower-meditations</a>
+            </div>
           </div>
           <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAAC8klEQVR4nO2czW3cMBBG34QEcqQAF7ClSJ25JncgleICAkjHBbj4ciCplW0kTpC1IgEzNy7f4QMG5PxRa+JvbPr2Vzg477zzX8ovVm3gZrBEYDFjsghTB20/7qPH+QfySHOQJIleGXpJGstG3S2/aQ7SeDT9zv8JXw/nEmGyiD3PQfXoXjLliA876nH+y/h+Bo0pY0OS6F/j/9Xj/D/x8d1a0+VqQMjALTJd8q56nH8sX/z7pkgKddW/RMQSMyQByx56nH88fyvpMRBkz68RG5ZIWQ4Ak5mZdXvpcf5xPNrYDJBqrgyppdN38/z5fPwSa4U7JEkjN7MhXa06+b67lx7nH8ivZS5oTGvpq1ySaEhqJ9nr3xPyxZfFSn9jBki5+LyUS/W69vv5fPzqxm0TSyM012r1tMffE/Kt/k0ZA9BkQQYhM3UhGwDTAGJ5ysfT7/wnVvvKaZtEa0wqRXAJwn25wj3+npW35xmszI8IKvOjXlINx0ukJFkH1e/8L61OiOage5itWTMt+9oMlo6m3/lPrNVCtQyqVRHtki7jBtZ7/Gj6nf+9ReqFHLNYvqstn7KBwXQRRvoRrX/ZQ4/zj+VpVZHKJV3LXILupW9Zev17Rr71n4sboYTe9RFHDcfF/H4+H//+hNZaKN2TrKBt9/Jo+p3/xGr/eTNECq30Be7H2fvPp+Q3zeUafwm1Sbk+vNu0QNy/J+ObG+c3Y4Q1HNfsawbPr07M25Aks8vVpFczSFcrZ3oyM6Zuva6Pqd/5X9rH9xttYFR2y+kOHn/PyW982VLn/HYjvCmMj6bf+c/5NvpliWhc6sjQ7FInwRrL4GEvPc4/ji/OtPrgOWRIP6KmIWQAWT93xbX1pezR9Dv/e3v/vp1+vmGkufhcU1dH+wZhBz3OfzW/1C+RpBnsWVL5CKlE5+Prd/4jXx/ZtQeT7fujq5XQ27+ax99z8hHuydPylK1/6RCLoambVd9kXQRTN++gx/nH8ub/z+C886flfwIND15yuv6C0wAAAABJRU5ErkJggg==" style={{ width: "clamp(60px, 10vw, 100px)", height: "clamp(60px, 10vw, 100px)", opacity: 0.6, borderRadius: 4 }} />

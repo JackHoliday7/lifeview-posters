@@ -197,35 +197,43 @@ a {
   -webkit-touch-callout: none;
 }
 
-/* faint edge arrows for mouse users — touch users swipe */
+/* edge arrows for mouse users — touch users swipe */
 .deck-arrow {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
   z-index: 60;
-  border: none;
-  background: none;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 4px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  background: rgba(10, 10, 15, 0.5);
   cursor: pointer;
-  padding: 22px 10px;
   font-family: Georgia, serif;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 1;
-  color: rgba(201, 168, 76, 0.8);
-  opacity: 0.3;
-  transition: opacity 0.2s ease;
+  color: rgba(201, 168, 76, 0.9);
+  opacity: 0.65;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
   user-select: none;
 }
 
 .deck-arrow:hover {
-  opacity: 0.95;
+  opacity: 1;
+  border-color: rgba(201, 168, 76, 0.7);
 }
 
 .deck-prev {
-  left: 2px;
+  left: 14px;
 }
 
 .deck-next {
-  right: 2px;
+  /* keep clear of the reserved scrollbar gutter */
+  right: 30px;
 }
 
 @media (pointer: coarse) {

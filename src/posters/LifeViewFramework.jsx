@@ -263,6 +263,10 @@ export default function LifeViewMaster() {
   // long-press on an item jumps the deck to its poster (tap keeps the
   // highlight behavior). One shared timer — only one press at a time.
   const lpState = useRef({});
+  // manual double-click detection for the anchor Steps: the first click's
+  // re-render recreates the Step DOM node (Step is defined per-render), so
+  // the browser never fires a native dblclick on it
+  const lastClickRef = useRef({ id: null, t: 0 });
   const longPress = (slug) => {
     if (!slug) return {};
     const s = lpState.current;
@@ -289,8 +293,16 @@ export default function LifeViewMaster() {
       <div
         ref={id ? el => leftRefs.current[id] = el : undefined}
         {...longPress(id && ANCHOR_POSTER[id])}
-        onDoubleClick={id && ANCHOR_POSTER[id] ? () => window.top.__lvNav?.jump?.(ANCHOR_POSTER[id]) : undefined}
-        onClick={isClickable ? () => { setActiveAnchor(id); setActiveTargets(connections.filter(c => c.from === id).map(c => c.to)); setPlaying(false); anchorIdx.current = ANCHORS.indexOf(id); } : undefined}
+        onClick={isClickable ? () => {
+          const now = Date.now();
+          if (lastClickRef.current.id === id && now - lastClickRef.current.t < 400 && ANCHOR_POSTER[id]) {
+            lastClickRef.current = { id: null, t: 0 };
+            window.top.__lvNav?.jump?.(ANCHOR_POSTER[id]);
+            return;
+          }
+          lastClickRef.current = { id, t: now };
+          setActiveAnchor(id); setActiveTargets(connections.filter(c => c.from === id).map(c => c.to)); setPlaying(false); anchorIdx.current = ANCHORS.indexOf(id);
+        } : undefined}
         style={{ display: 'flex', alignItems: 'center', gap: 0, marginBottom: '0.15vh',
           flexDirection: 'row-reverse',
           justifyContent: 'flex-start',
