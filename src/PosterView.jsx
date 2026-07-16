@@ -35,6 +35,30 @@ const SWIPE_MIN = 60; // px of horizontal travel to count as a swipe
 const LP_MS = 550; // long-press duration
 const LP_TOL = 12; // px of movement that cancels a long-press
 
+// first-visit gesture hint: shows after HINT_DELAY of no navigation, then
+// stays away for HINT_TTL. Every navigation re-stamps the clock, so anyone
+// who actually uses the deck never sees it again.
+const HINT_KEY = "lv-hint-seen";
+const HINT_TTL = 30 * 24 * 3600 * 1000; // a month
+const HINT_DELAY = 15000;
+
+function hintAlreadySeen() {
+  try {
+    const t = +localStorage.getItem(HINT_KEY);
+    return !!t && Date.now() - t < HINT_TTL;
+  } catch {
+    return true; // storage unavailable — never nag
+  }
+}
+
+function markHintSeen() {
+  try {
+    localStorage.setItem(HINT_KEY, String(Date.now()));
+  } catch {
+    /* ignore */
+  }
+}
+
 // Attach swipe / long-press / horizontal-wheel / arrow-key navigation to an
 // event target (the parent stage, or an iframe's document). Returns a detach
 // function. Handlers call through to window.__lvNav so they always see the
@@ -335,14 +359,41 @@ export default function PosterView() {
   const n = posters.length;
   const go = (i) => navigate("/p/" + posters[((i % n) + n) % n].slug);
 
+  // first-visit gesture hint
+  const [showHint, setShowHint] = useState(false);
+  useEffect(() => {
+    if (hintAlreadySeen()) return undefined;
+    const t = setTimeout(() => {
+      if (!hintAlreadySeen()) setShowHint(true);
+    }, HINT_DELAY);
+    return () => clearTimeout(t);
+  }, []);
+  const dismissHint = () => {
+    markHintSeen();
+    setShowHint(false);
+  };
+
   // navigation bridge — gesture handlers (parent and inside each iframe) and
-  // the framework map's long-press items call through this
+  // the framework map's long-press items call through this. Any navigation
+  // counts as "knows the gestures" for the hint.
   useEffect(() => {
     window.__lvNav = {
-      next: () => go(idx + 1),
-      prev: () => go(idx - 1),
-      jump: (s) => navigate("/p/" + s),
-      home: () => navigate("/p/" + posters[0].slug),
+      next: () => {
+        dismissHint();
+        go(idx + 1);
+      },
+      prev: () => {
+        dismissHint();
+        go(idx - 1);
+      },
+      jump: (s) => {
+        dismissHint();
+        navigate("/p/" + s);
+      },
+      home: () => {
+        dismissHint();
+        navigate("/p/" + posters[0].slug);
+      },
     };
     return () => {
       delete window.__lvNav;
@@ -419,6 +470,27 @@ export default function PosterView() {
           </Suspense>
         )}
       </div>
+      {showHint && (
+        <div className="deck-hint" onClick={dismissHint}>
+          <div className="deck-hint-card">
+            <div className="deck-hint-title">How to explore</div>
+            <div className="deck-hint-row">
+              {coarse
+                ? "Swipe left or right to move between posters"
+                : "Use the ← → keys, the edge arrows, or swipe sideways to move between posters"}
+            </div>
+            <div className="deck-hint-row">
+              Press and hold any poster to return to the framework map
+            </div>
+            <div className="deck-hint-row">
+              On the map, press and hold any item to open its poster
+            </div>
+            <button className="deck-hint-btn" onClick={dismissHint}>
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

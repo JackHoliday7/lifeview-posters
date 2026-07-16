@@ -234,6 +234,66 @@ a {
   }
 }
 
+/* first-visit gesture hint */
+.deck-hint {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 18px 8vh;
+  background: linear-gradient(180deg, transparent 40%, rgba(5, 5, 10, 0.55));
+  animation: slidefade 0.6s ease;
+  cursor: pointer;
+}
+
+.deck-hint-card {
+  max-width: 420px;
+  border-radius: 10px;
+  padding: 22px 26px;
+  background: rgba(12, 11, 9, 0.92);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+.deck-hint-title {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24px;
+  color: #c9a84c;
+  margin-bottom: 12px;
+}
+
+.deck-hint-row {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(240, 236, 228, 0.75);
+  margin-bottom: 9px;
+}
+
+.deck-hint-btn {
+  margin-top: 8px;
+  padding: 7px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  background: none;
+  color: #c9a84c;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.deck-hint-btn:hover {
+  background: rgba(201, 168, 76, 0.12);
+}
+
 /* gentle cross-fade when the slide changes */
 .slide-fade {
   animation: slidefade 0.35s ease;
