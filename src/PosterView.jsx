@@ -26,11 +26,29 @@ const FONTS_HREF =
   "https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Bebas+Neue&family=Caveat:wght@400;500;600;700&family=Cinzel:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Rock+Salt&family=Tangerine:wght@400;700&family=UnifrakturMaguntia&display=swap";
 
 function useViewport() {
-  const [size, setSize] = useState({ w: window.innerWidth, h: window.innerHeight });
+  // clientWidth/Height exclude scrollbars — sizing to innerWidth causes a
+  // sliver of horizontal scroll whenever the vertical scrollbar is visible
+  const read = () => ({
+    w: document.documentElement.clientWidth,
+    h: document.documentElement.clientHeight,
+  });
+  const [size, setSize] = useState(read);
   useEffect(() => {
-    const fn = () => setSize({ w: window.innerWidth, h: window.innerHeight });
+    const fn = () => setSize(read);
     window.addEventListener("resize", fn);
-    return () => window.removeEventListener("resize", fn);
+    // a scrollbar appearing/disappearing changes clientWidth without firing
+    // a window resize event — watch the root element's box too
+    const ro = new ResizeObserver(fn);
+    ro.observe(document.documentElement);
+    // one delayed re-read in case layout (scrollbar gutter, late styles)
+    // settles after the initial render
+    const t = setTimeout(fn, 150);
+    return () => {
+      window.removeEventListener("resize", fn);
+      ro.disconnect();
+      clearTimeout(t);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return size;
 }
@@ -198,11 +216,15 @@ export default function PosterView() {
   const coarse = window.matchMedia("(pointer: coarse)").matches;
   const ratio = w / h;
   const isPortraitTV = Math.abs(ratio - DESIGN_W / DESIGN_H) < 0.03;
-  const mode = coarse
-    ? "direct"
-    : ratio >= 1 || isPortraitTV
-      ? "frame"
-      : "flow";
+  // Readable flow mode until the window is CLEARLY landscape, with
+  // hysteresis so near-square windows don't snap between modes while
+  // resizing (frame above 1.2, back to flow below 1.1).
+  const [wide, setWide] = useState(() => ratio > 1.15);
+  useEffect(() => {
+    if (ratio > 1.2) setWide(true);
+    else if (ratio < 1.1) setWide(false);
+  }, [ratio]);
+  const mode = coarse ? "direct" : isPortraitTV || wide ? "frame" : "flow";
 
   const { Component } = poster;
   return (
