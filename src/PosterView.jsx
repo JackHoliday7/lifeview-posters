@@ -44,7 +44,10 @@ function Loading({ poster }) {
 
 function PortraitFrame({ poster, w, h }) {
   const iframeRef = useRef(null);
-  const scale = Math.min(h / DESIGN_H, w / DESIGN_W);
+  // Landscape screens: fit the frame to the viewport height, hugging left.
+  // Portrait screens (vertically-mounted TVs/monitors): fill the full width —
+  // exactly full-bleed on a true 9:16 display, scrolling slightly on others.
+  const scale = w >= h ? h / DESIGN_H : w / DESIGN_W;
   const { Component } = poster;
 
   useEffect(() => {
@@ -74,6 +77,7 @@ function PortraitFrame({ poster, w, h }) {
 
   return (
     <div
+      className="poster-frame-box"
       style={{
         width: Math.round(DESIGN_W * scale),
         height: Math.round(DESIGN_H * scale),
