@@ -136,6 +136,14 @@ const ANCHOR_POSTER = {
   victory: 'heros-journey',
 };
 
+// Section headers jump to the poster of their first item.
+const SECTION_POSTER = {
+  'Discover Healing': 'three-healings',
+  'Choose Your Guide': 'source-vs-control',
+  'Align and Activate': 'quiet-the-ego',
+  'Become the Hero': 'heros-journey',
+};
+
 function Lines({ leftRefs, rightRefs, containerRef, dividerRef, opacity, thickness, activeAnchor }) {
   const canvasRef = useRef(null);
 
@@ -321,11 +329,29 @@ export default function LifeViewMaster() {
     );
   };
 
-  const SectionHeader = ({ num, title }) => (
-    <div style={{ display: 'flex', alignItems: 'baseline', gap: '1vw', marginBottom: '0.3vh', justifyContent: 'flex-end' }}>
-      <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'normal', fontSize: 'clamp(16px, 2.6vw, 36px)', color: goldDim, fontWeight: 700, lineHeight: 1.2, textAlign: 'right', letterSpacing: '0.04em' }}>{title}</span>
-    </div>
-  );
+  const SectionHeader = ({ num, title }) => {
+    const slug = SECTION_POSTER[title];
+    return (
+      <div
+        {...longPress(slug)}
+        onClick={slug ? () => {
+          // manual double-click detection — same reason as the Steps: the
+          // rotation re-render can recreate this node between the two clicks
+          const now = Date.now();
+          const key = 'section:' + title;
+          if (lastClickRef.current.id === key && now - lastClickRef.current.t < 400) {
+            lastClickRef.current = { id: null, t: 0 };
+            window.top.__lvNav?.jump?.(slug);
+            return;
+          }
+          lastClickRef.current = { id: key, t: now };
+        } : undefined}
+        style={{ display: 'flex', alignItems: 'baseline', gap: '1vw', marginBottom: '0.3vh', justifyContent: 'flex-end', cursor: slug ? 'pointer' : 'default' }}
+      >
+        <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'normal', fontSize: 'clamp(16px, 2.6vw, 36px)', color: goldDim, fontWeight: 700, lineHeight: 1.2, textAlign: 'right', letterSpacing: '0.04em' }}>{title}</span>
+      </div>
+    );
+  };
 
   return (
     <div style={{ background: '#0a0a0c', height: '100vh', fontFamily: "'Cormorant Garamond', Georgia, serif", display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
