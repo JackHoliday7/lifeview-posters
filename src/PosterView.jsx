@@ -470,22 +470,18 @@ export default function PosterView() {
           </Suspense>
         )}
       </div>
-      {showHint && (
+      {showHint && coarse && (
         <div className="deck-hint" onClick={dismissHint}>
           <div className="deck-hint-card">
             <div className="deck-hint-title">How to explore</div>
             <div className="deck-hint-row">
-              {coarse
-                ? "Swipe left or right to move between posters"
-                : "Use the ← → keys, the edge arrows, or swipe sideways to move between posters"}
+              Swipe left or right to move between posters
             </div>
             <div className="deck-hint-row">
               Press and hold any poster to return to the framework map
             </div>
             <div className="deck-hint-row">
-              {coarse
-                ? "On the map, press and hold any item to open its poster"
-                : "On the map, double-click (or press and hold) any item to open its poster"}
+              On the map, press and hold any item to open its poster
             </div>
             <button className="deck-hint-btn" onClick={dismissHint}>
               Got it
@@ -493,6 +489,39 @@ export default function PosterView() {
           </div>
         </div>
       )}
+      {showHint &&
+        !coarse &&
+        (() => {
+          // on landscape frame mode the poster hugs left — put the hint in
+          // the empty space beside it; otherwise a centered dialog
+          const posterW = Math.round(DESIGN_W * (h / DESIGN_H));
+          const side = mode === "frame" && w >= h && w - posterW > 360;
+          return (
+            <div
+              className={"deck-hint-desktop " + (side ? "side" : "center")}
+              style={side ? { left: posterW } : undefined}
+              onClick={dismissHint}
+            >
+              <div className="deck-hint-panel">
+                <div className="deck-hint-title">How to explore</div>
+                <div className="deck-hint-drow">
+                  <span className="kbd">&larr;</span>
+                  <span className="kbd">&rarr;</span> keys, the edge arrows, or
+                  a sideways swipe move between the sixteen posters
+                </div>
+                <div className="deck-hint-drow">
+                  Double-click an item on the framework map to open its poster
+                </div>
+                <div className="deck-hint-drow">
+                  Press and hold any poster to return to the framework map
+                </div>
+                <button className="deck-hint-btn" onClick={dismissHint}>
+                  Got it
+                </button>
+              </div>
+            </div>
+          );
+        })()}
     </div>
   );
 }

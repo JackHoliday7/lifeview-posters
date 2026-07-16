@@ -294,6 +294,80 @@ a {
   background: rgba(201, 168, 76, 0.12);
 }
 
+/* desktop hint — side panel in the dead space beside the poster (frame
+   mode), or a centered dialog when the poster fills the width */
+.deck-hint-desktop {
+  position: fixed;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: slidefade 0.6s ease;
+}
+
+.deck-hint-desktop.side {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0 24px;
+}
+
+.deck-hint-desktop.center {
+  inset: 0;
+  background: rgba(5, 5, 10, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.deck-hint-panel {
+  max-width: 400px;
+  text-align: left;
+  padding: 28px 34px;
+}
+
+.deck-hint-desktop.side .deck-hint-panel {
+  padding: 10px 0 10px 32px;
+  border-left: 1px solid rgba(201, 168, 76, 0.25);
+}
+
+.deck-hint-desktop.center .deck-hint-panel {
+  background: rgba(12, 11, 9, 0.95);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 10px;
+}
+
+.deck-hint-panel .deck-hint-title {
+  font-size: 30px;
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.deck-hint-drow {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.55;
+  color: rgba(240, 236, 228, 0.75);
+  margin-bottom: 14px;
+}
+
+.kbd {
+  display: inline-block;
+  padding: 0 7px;
+  margin: 0 3px 0 0;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 4px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #c9a84c;
+  vertical-align: 2px;
+}
+
+.deck-hint-panel .deck-hint-btn {
+  margin-top: 10px;
+}
+
 /* gentle cross-fade when the slide changes */
 .slide-fade {
   animation: slidefade 0.35s ease;
