@@ -180,7 +180,7 @@ a {
    let the page scroll instead. !important is required to beat the inline
    styles. */
 @media (max-width: 820px), (pointer: coarse) and (max-height: 620px) {
-  .poster-stage > *:not(.back-btn):not(.poster-loading):not(.poster-frame-box) {
+  .poster-stage .slide-fade > *:not(.poster-loading):not(.poster-frame-box) {
     height: auto !important;
     min-height: 100vh;
     min-height: 100svh;

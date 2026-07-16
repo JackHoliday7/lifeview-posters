@@ -289,7 +289,7 @@ export default function LifeViewMaster() {
       <div
         ref={id ? el => leftRefs.current[id] = el : undefined}
         {...longPress(id && ANCHOR_POSTER[id])}
-        onClick={isClickable ? () => { setActiveAnchor(id); setPlaying(false); anchorIdx.current = ANCHORS.indexOf(id); } : undefined}
+        onClick={isClickable ? () => { setActiveAnchor(id); setActiveTargets(connections.filter(c => c.from === id).map(c => c.to)); setPlaying(false); anchorIdx.current = ANCHORS.indexOf(id); } : undefined}
         style={{ display: 'flex', alignItems: 'center', gap: 0, marginBottom: '0.15vh',
           flexDirection: 'row-reverse',
           justifyContent: 'flex-start',
