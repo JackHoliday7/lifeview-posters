@@ -201,7 +201,7 @@ a {
    chrome, so it never lingers over the artwork */
 .framework-pill {
   position: fixed;
-  top: 38px;
+  top: 50px;
   left: 14px;
   z-index: 60;
   display: inline-flex;
