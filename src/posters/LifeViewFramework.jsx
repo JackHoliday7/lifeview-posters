@@ -74,7 +74,7 @@ const toolkitItems = [
 ];
 
 // All unique left anchors in order
-const ANCHORS = ['personal', 'interpersonal', 'societal', 'source', 'control', 'align', 'inner', 'higher', 'soul', 'hear', 'commit', 'progress', 'train', 'gifts', 'souls', 'victory'];
+const ANCHORS = ['personal', 'interpersonal', 'societal', 'source', 'control', 'align', 'inner', 'higher', 'soul', 'hear', 'commit', 'gifts', 'progress', 'souls', 'train', 'victory'];
 const ANCHOR_LABELS = {
   personal:      'Heal the Self',
   interpersonal: 'Heal Relationships',
