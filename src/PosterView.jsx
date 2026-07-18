@@ -297,6 +297,10 @@ function PortraitFrame({ poster, w, h }) {
 function FlowFrame({ poster, w }) {
   const iframeRef = useRef(null);
   const [contentH, setContentH] = useState(600);
+  // the poster stays hidden (spinner in its place) until its content AND its
+  // web fonts have settled, then appears once at its final height — late
+  // font arrivals were re-heighting the page in visible hops
+  const [ready, setReady] = useState(false);
   const layoutW = Math.min(w, 820);
 
   usePosterFrame(
@@ -306,6 +310,26 @@ function FlowFrame({ poster, w }) {
     `#poster-root>*{height:auto !important;overflow:visible !important;}`,
     (doc) => {
       let committed = 0;
+      let revealed = false;
+      let revealScheduled = false;
+      let revealTimer = null;
+      const reveal = () => {
+        if (revealed) return;
+        revealed = true;
+        measure();
+        setReady(true);
+      };
+      const scheduleReveal = () => {
+        if (revealed || revealScheduled) return;
+        revealScheduled = true;
+        // fonts.ready (accessed now, after the poster's text exists and its
+        // fonts have been requested) resolves when they're in; the timer is
+        // the fallback if a font hangs
+        revealTimer = setTimeout(reveal, 1400);
+        if (doc.fonts && doc.fonts.ready) {
+          doc.fonts.ready.then(() => setTimeout(reveal, 60));
+        }
+      };
       const measure = () => {
         // the poster's vh-based paddings depend on the iframe height, so the
         // natural height moves as we resize — settle the feedback loop
@@ -332,6 +356,9 @@ function FlowFrame({ poster, w }) {
         } else {
           iframe.style.height = committed + "px";
         }
+        // real poster content is on screen (not the loading stub) — start
+        // waiting for its fonts so we can reveal
+        if (h > 250) scheduleReveal();
       };
       // must be the iframe window's ResizeObserver — the parent window's
       // does not observe elements in another document
@@ -350,30 +377,36 @@ function FlowFrame({ poster, w }) {
       return () => {
         if (ro) ro.disconnect();
         timers.forEach(clearTimeout);
+        clearTimeout(revealTimer);
       };
     }
   );
 
   return (
-    <div
-      className="poster-frame-box"
-      style={{
-        width: layoutW,
-        height: contentH,
-        overflow: "hidden",
-      }}
-    >
-      <iframe
-        ref={iframeRef}
-        title={poster.title}
+    <>
+      {!ready && <Loading poster={poster} />}
+      <div
+        className="poster-frame-box"
         style={{
           width: layoutW,
-          height: contentH,
-          border: 0,
-          display: "block",
+          height: ready ? contentH : 0,
+          overflow: "hidden",
+          opacity: ready ? 1 : 0,
+          transition: "opacity 0.3s ease",
         }}
-      />
-    </div>
+      >
+        <iframe
+          ref={iframeRef}
+          title={poster.title}
+          style={{
+            width: layoutW,
+            height: contentH,
+            border: 0,
+            display: "block",
+          }}
+        />
+      </div>
+    </>
   );
 }
 
