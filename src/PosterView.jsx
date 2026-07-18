@@ -306,8 +306,11 @@ function FlowFrame({ poster, w }) {
   usePosterFrame(
     iframeRef,
     poster,
-    // relax the poster root's fixed-viewport canvas so content flows
-    `#poster-root>*{height:auto !important;overflow:visible !important;}`,
+    // relax the poster root's fixed-viewport canvas so content flows; the
+    // iframe itself must NEVER scroll (the page scrolls) — a transient iframe
+    // scrollbar steals width, re-wraps every line, and see-saws the height
+    `html,body{overflow:hidden}` +
+      `#poster-root>*{height:auto !important;overflow:visible !important;}`,
     (doc) => {
       let committed = 0;
       let revealed = false;
