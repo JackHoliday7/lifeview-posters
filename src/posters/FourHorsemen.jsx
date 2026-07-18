@@ -110,7 +110,9 @@ const FourHorsemenPoster = () => {
                   : `linear-gradient(135deg, ${h.bgFrom} 0%, ${h.bgTo} 100%)`,
                 border: `1px solid ${h.border}`,
                 cursor: "default",
-                transition: "all 0.4s ease",
+                // background only — "all" also animates the vh-based padding,
+                // which feedback-loops with the site's flow-height measurement
+                transition: "background 0.4s ease",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",

@@ -54,7 +54,7 @@ const ThreeZonesPoster = () => {
       {/* Three Zone Cards */}
       <div style={{ display: "flex", flexDirection: "column", gap: "clamp(20px, 5vh, 60px)", position: "relative", zIndex: 1 }}>
         {/* RED ZONE */}
-        <div onMouseEnter={() => setActiveZone("red")} onMouseLeave={() => setActiveZone(null)} style={{ borderRadius: "6px", padding: "clamp(18px, 3vw, 36px)", background: activeZone === "red" ? "linear-gradient(135deg, rgba(180,40,40,0.25) 0%, rgba(120,20,20,0.15) 100%)" : "linear-gradient(135deg, rgba(180,40,40,0.12) 0%, rgba(120,20,20,0.06) 100%)", border: "1px solid rgba(200,60,60,0.2)", cursor: "default", transition: "all 0.4s ease", display: "flex", flexDirection: "column" }}>
+        <div onMouseEnter={() => setActiveZone("red")} onMouseLeave={() => setActiveZone(null)} style={{ borderRadius: "6px", padding: "clamp(18px, 3vw, 36px)", background: activeZone === "red" ? "linear-gradient(135deg, rgba(180,40,40,0.25) 0%, rgba(120,20,20,0.15) 100%)" : "linear-gradient(135deg, rgba(180,40,40,0.12) 0%, rgba(120,20,20,0.06) 100%)", border: "1px solid rgba(200,60,60,0.2)", cursor: "default", transition: "background 0.4s ease", display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(8px, 1.5vw, 16px)", marginBottom: "clamp(8px, 1.8vh, 20px)" }}>
             <div style={{ width: "clamp(12px, 2vw, 18px)", height: "clamp(12px, 2vw, 18px)", borderRadius: "50%", background: "#c43c3c", boxShadow: "0 0 12px rgba(196,60,60,0.5)", flexShrink: 0 }} />
             <h2 style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 400, color: "#e85555", margin: 0, letterSpacing: "-0.01em" }}>Red Zone</h2>
@@ -68,7 +68,7 @@ const ThreeZonesPoster = () => {
         </div>
 
         {/* GREEN ZONE */}
-        <div onMouseEnter={() => setActiveZone("green")} onMouseLeave={() => setActiveZone(null)} style={{ borderRadius: "6px", padding: "clamp(18px, 3vw, 36px)", background: activeZone === "green" ? "linear-gradient(135deg, rgba(40,160,70,0.25) 0%, rgba(20,100,40,0.15) 100%)" : "linear-gradient(135deg, rgba(40,160,70,0.12) 0%, rgba(20,100,40,0.06) 100%)", border: "1px solid rgba(60,180,80,0.25)", cursor: "default", transition: "all 0.4s ease", display: "flex", flexDirection: "column", position: "relative" }}>
+        <div onMouseEnter={() => setActiveZone("green")} onMouseLeave={() => setActiveZone(null)} style={{ borderRadius: "6px", padding: "clamp(18px, 3vw, 36px)", background: activeZone === "green" ? "linear-gradient(135deg, rgba(40,160,70,0.25) 0%, rgba(20,100,40,0.15) 100%)" : "linear-gradient(135deg, rgba(40,160,70,0.12) 0%, rgba(20,100,40,0.06) 100%)", border: "1px solid rgba(60,180,80,0.25)", cursor: "default", transition: "background 0.4s ease", display: "flex", flexDirection: "column", position: "relative" }}>
           <div style={{ position: "absolute", inset: "-1px", borderRadius: "7px", boxShadow: "0 0 30px rgba(60,180,80,0.08), inset 0 0 30px rgba(60,180,80,0.03)", pointerEvents: "none" }} />
           <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(8px, 1.5vw, 16px)", marginBottom: "clamp(8px, 1.8vh, 20px)" }}>
             <div style={{ width: "clamp(12px, 2vw, 18px)", height: "clamp(12px, 2vw, 18px)", borderRadius: "50%", background: "#3cb454", boxShadow: "0 0 16px rgba(60,180,84,0.5)", flexShrink: 0 }} />
@@ -82,7 +82,7 @@ const ThreeZonesPoster = () => {
         </div>
 
         {/* BLUE ZONE */}
-        <div onMouseEnter={() => setActiveZone("blue")} onMouseLeave={() => setActiveZone(null)} style={{ borderRadius: "6px", padding: "clamp(18px, 3vw, 36px)", background: activeZone === "blue" ? "linear-gradient(135deg, rgba(40,80,180,0.25) 0%, rgba(20,40,120,0.15) 100%)" : "linear-gradient(135deg, rgba(40,80,180,0.12) 0%, rgba(20,40,120,0.06) 100%)", border: "1px solid rgba(60,100,200,0.2)", cursor: "default", transition: "all 0.4s ease", display: "flex", flexDirection: "column" }}>
+        <div onMouseEnter={() => setActiveZone("blue")} onMouseLeave={() => setActiveZone(null)} style={{ borderRadius: "6px", padding: "clamp(18px, 3vw, 36px)", background: activeZone === "blue" ? "linear-gradient(135deg, rgba(40,80,180,0.25) 0%, rgba(20,40,120,0.15) 100%)" : "linear-gradient(135deg, rgba(40,80,180,0.12) 0%, rgba(20,40,120,0.06) 100%)", border: "1px solid rgba(60,100,200,0.2)", cursor: "default", transition: "background 0.4s ease", display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(8px, 1.5vw, 16px)", marginBottom: "clamp(8px, 1.8vh, 20px)" }}>
             <div style={{ width: "clamp(12px, 2vw, 18px)", height: "clamp(12px, 2vw, 18px)", borderRadius: "50%", background: "#3c6cc4", boxShadow: "0 0 12px rgba(60,108,196,0.5)", flexShrink: 0 }} />
             <h2 style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 400, color: "#5588e8", margin: 0, letterSpacing: "-0.01em" }}>Blue Zone</h2>
