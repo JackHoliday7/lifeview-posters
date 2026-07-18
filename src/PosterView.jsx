@@ -93,10 +93,19 @@ function attachGestures(target, { longPressHome }) {
     }
   };
   const move = (e) => {
+    nav().poke?.(); // any pointer motion wakes the chrome (video-player style)
     if (!active) return;
     if (Math.abs(e.clientX - startX) > LP_TOL || Math.abs(e.clientY - startY) > LP_TOL) {
       clearLp();
     }
+  };
+  // desktop: double-click anywhere on a poster returns to the framework map
+  // (the map itself uses double-click on its items to jump outward)
+  const dbl = (e) => {
+    if (!longPressHome) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (e.target && e.target.closest && (e.target.closest(".deck-arrow") || e.target.closest(".deck-hint") || e.target.closest(".deck-hint-desktop"))) return;
+    nav().home?.();
   };
   const up = (e) => {
     if (!active) return;
@@ -127,6 +136,7 @@ function attachGestures(target, { longPressHome }) {
     }
   };
   const key = (e) => {
+    nav().poke?.();
     if (e.key === "ArrowRight") nav().next?.();
     else if (e.key === "ArrowLeft") nav().prev?.();
     else if (e.key === "Escape" || e.key === "Home") nav().home?.();
@@ -144,6 +154,7 @@ function attachGestures(target, { longPressHome }) {
   target.addEventListener("wheel", wheel, { passive: true });
   target.addEventListener("keydown", key);
   target.addEventListener("contextmenu", ctx);
+  target.addEventListener("dblclick", dbl);
   return () => {
     target.removeEventListener("pointerdown", down);
     target.removeEventListener("pointermove", move);
@@ -152,6 +163,7 @@ function attachGestures(target, { longPressHome }) {
     target.removeEventListener("wheel", wheel);
     target.removeEventListener("keydown", key);
     target.removeEventListener("contextmenu", ctx);
+    target.removeEventListener("dblclick", dbl);
   };
 }
 
@@ -354,6 +366,26 @@ export default function PosterView() {
   const n = posters.length;
   const go = (i) => navigate("/p/" + posters[((i % n) + n) % n].slug);
 
+  // video-player-style chrome: the edge arrows appear on mouse/key activity
+  // and fade away after a moment of stillness
+  const [chromeOn, setChromeOn] = useState(true);
+  const chromeTimer = useRef(null);
+  const poke = () => {
+    setChromeOn(true);
+    clearTimeout(chromeTimer.current);
+    chromeTimer.current = setTimeout(() => setChromeOn(false), 2500);
+  };
+  useEffect(() => {
+    poke();
+    const mv = () => window.__lvNav?.poke?.();
+    window.addEventListener("mousemove", mv);
+    return () => {
+      window.removeEventListener("mousemove", mv);
+      clearTimeout(chromeTimer.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // first-visit gesture hint
   const [showHint, setShowHint] = useState(false);
   useEffect(() => {
@@ -389,6 +421,7 @@ export default function PosterView() {
         dismissHint();
         navigate("/p/" + posters[0].slug);
       },
+      poke,
     };
     return () => {
       delete window.__lvNav;
@@ -442,7 +475,7 @@ export default function PosterView() {
 
   const { Component } = poster;
   return (
-    <div className="poster-stage" ref={stageRef}>
+    <div className={"poster-stage" + (chromeOn ? " chrome-on" : "")} ref={stageRef}>
       <button
         className="deck-arrow deck-prev"
         aria-label="Previous poster"
@@ -509,7 +542,9 @@ export default function PosterView() {
                   Double-click an item on the framework map to open its poster
                 </div>
                 <div className="deck-hint-drow">
-                  Press and hold any poster to return to the framework map
+                  Double-click anywhere on a poster (or press{" "}
+                  <span className="kbd">Esc</span>) to return to the framework
+                  map
                 </div>
                 <button className="deck-hint-btn" onClick={dismissHint}>
                   Got it
