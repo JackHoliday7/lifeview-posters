@@ -129,6 +129,7 @@ function attachGestures(target, { longPressHome }) {
   const key = (e) => {
     if (e.key === "ArrowRight") nav().next?.();
     else if (e.key === "ArrowLeft") nav().prev?.();
+    else if (e.key === "Escape" || e.key === "Home") nav().home?.();
   };
   const ctx = (e) => {
     // suppress the touch long-press context menu, but leave mouse
@@ -406,6 +407,7 @@ export default function PosterView() {
     const key = (e) => {
       if (e.key === "ArrowRight") window.__lvNav?.next?.();
       else if (e.key === "ArrowLeft") window.__lvNav?.prev?.();
+      else if (e.key === "Escape" || e.key === "Home") window.__lvNav?.home?.();
     };
     window.addEventListener("keydown", key);
     return () => {
@@ -441,15 +443,6 @@ export default function PosterView() {
   const { Component } = poster;
   return (
     <div className="poster-stage" ref={stageRef}>
-      {!coarse && poster.slug !== posters[0].slug && (
-        <button
-          className="framework-pill"
-          aria-label="Return to the framework map"
-          onClick={() => window.__lvNav?.home?.()}
-        >
-          <span aria-hidden="true">&larr;</span> Framework
-        </button>
-      )}
       <button
         className="deck-arrow deck-prev"
         aria-label="Previous poster"
