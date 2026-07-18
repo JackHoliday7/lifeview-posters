@@ -79,6 +79,7 @@ function attachGestures(target, { longPressHome }) {
   };
 
   const down = (e) => {
+    nav().poke?.(); // clicks/taps keep the chrome awake too
     if (e.pointerType === "mouse" && e.button !== 0) return;
     if (e.pointerType !== "mouse") lastTouchDown = Date.now();
     active = true;
@@ -304,12 +305,33 @@ function FlowFrame({ poster, w }) {
     // relax the poster root's fixed-viewport canvas so content flows
     `#poster-root>*{height:auto !important;overflow:visible !important;}`,
     (doc) => {
+      let committed = 0;
       const measure = () => {
-        const next = doc.body.scrollHeight;
-        // only grow: content with animated/rotating text (e.g. the framework
-        // map's script panel) changes height; growing monotonically lets the
-        // height settle instead of jiggling the page
-        if (next > 0) setContentH((prev) => (next > prev + 1 ? next : prev));
+        // the poster's vh-based paddings depend on the iframe height, so the
+        // natural height moves as we resize — settle the feedback loop
+        // synchronously (direct style writes force layout, no paint between
+        // iterations) and commit the final height once, so the page doesn't
+        // visibly jiggle through the intermediate steps
+        const iframe = iframeRef.current;
+        if (!iframe) return;
+        let h = doc.body.scrollHeight;
+        if (h <= 0) return;
+        for (let i = 0; i < 10; i++) {
+          iframe.style.height = h + "px";
+          const next = doc.body.scrollHeight;
+          if (Math.abs(next - h) <= 1) break;
+          h = next;
+        }
+        // grow freely, and accept LARGE shrinks in one step (web fonts
+        // arriving tighten the layout) — but hold small shrinks so content
+        // with rotating text (the framework map's quote panel) doesn't make
+        // the page breathe
+        if (h > committed + 1 || h < committed - 60) {
+          committed = h;
+          setContentH(h);
+        } else {
+          iframe.style.height = committed + "px";
+        }
       };
       // must be the iframe window's ResizeObserver — the parent window's
       // does not observe elements in another document
@@ -405,20 +427,27 @@ export default function PosterView() {
   // counts as "knows the gestures" for the hint.
   useEffect(() => {
     window.__lvNav = {
+      // every navigation resets the chrome timer — otherwise the arrow fades
+      // away under the cursor mid-click-sequence and the next two clicks land
+      // on the poster as an accidental double-click (= home)
       next: () => {
         dismissHint();
+        poke();
         go(idx + 1);
       },
       prev: () => {
         dismissHint();
+        poke();
         go(idx - 1);
       },
       jump: (s) => {
         dismissHint();
+        poke();
         navigate("/p/" + s);
       },
       home: () => {
         dismissHint();
+        poke();
         navigate("/p/" + posters[0].slug);
       },
       poke,
