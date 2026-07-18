@@ -22,8 +22,6 @@ import { findPoster, posters } from "./posters.js";
 //  - Touch devices render directly; the mobile CSS in index.css handles them.
 const DESIGN_W = 1080;
 const DESIGN_H = 1920;
-const FLOW_W = 420; // layout width of the readable "flow" rendering
-const MAX_FLOW_SCALE = 1.9; // cap magnification so wide-ish windows don't get clown-sized type
 
 // Union of every Google Font family used across the 16 posters. The iframe is
 // a separate document, so it needs its own font links (the posters' own
@@ -276,18 +274,16 @@ function PortraitFrame({ poster, w, h }) {
   );
 }
 
-// Readable rendering for portrait monitors: the poster lays out at phone
-// width (its fixed 100vh sizing relaxed so it flows to natural height), and
-// the whole thing is magnified to fill the screen width. The page scrolls.
+// Readable rendering for portrait monitors and narrow windows: the poster
+// lays out phone-style at the window's own width, 1:1 — NO magnification, so
+// type stays at its designed reading size and pages stay short. Its fixed
+// 100vh sizing is relaxed so it flows to natural height and the page
+// scrolls. Width is capped at 820 (the posters' narrow-layout threshold);
+// wider portrait windows get a quiet margin on the right.
 function FlowFrame({ poster, w }) {
   const iframeRef = useRef(null);
   const [contentH, setContentH] = useState(600);
-  // lay out at phone width and magnify to fill the screen, but cap the
-  // magnification — on wider windows the layout column widens instead of the
-  // type growing without bound. Never lay out wider than the screen itself
-  // (windows narrower than FLOW_W get the plain phone rendering, unmagnified).
-  const layoutW = Math.min(w, Math.max(FLOW_W, Math.round(w / MAX_FLOW_SCALE)));
-  const scale = w / layoutW;
+  const layoutW = Math.min(w, 820);
 
   usePosterFrame(
     iframeRef,
@@ -327,8 +323,8 @@ function FlowFrame({ poster, w }) {
     <div
       className="poster-frame-box"
       style={{
-        width: w,
-        height: Math.round(contentH * scale),
+        width: layoutW,
+        height: contentH,
         overflow: "hidden",
       }}
     >
@@ -340,8 +336,6 @@ function FlowFrame({ poster, w }) {
           height: contentH,
           border: 0,
           display: "block",
-          transform: `scale(${scale})`,
-          transformOrigin: "top left",
         }}
       />
     </div>
