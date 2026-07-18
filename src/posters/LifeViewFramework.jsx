@@ -359,15 +359,15 @@ export default function LifeViewMaster() {
       {/* HEADER */}
       <div style={{ textAlign: 'center', padding: '1.5vh 4vw 1vh', borderBottom: `1px solid ${goldBorder}`, position: 'relative', flexShrink: 0 }}>
         <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '55vw', height: '8vh', background: 'radial-gradient(ellipse at center top, rgba(201,168,76,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.32em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.5vh', fontFamily: "'Cinzel', serif", fontWeight: 300 }}>Higher Power Sedona</div>
-        <h1 style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: 'clamp(36px, 7vw, 80px)', fontWeight: 400, color: cream, margin: '0', lineHeight: 1.0 }}>LifeView</h1>
-        <div style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.26em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.8vh', marginTop: '0.5vh' }}>A Complete Field Guide</div>
+        <div style={{ fontSize: 'clamp(13px, 1.1vw, 15px)', letterSpacing: '0.32em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.5vh', fontFamily: "'Cinzel', serif", fontWeight: 300 }}>Higher Power Sedona</div>
+        <h1 style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: 'clamp(38px, 7vw, 80px)', fontWeight: 400, color: cream, margin: '0', lineHeight: 1.0 }}>LifeView</h1>
+        <div style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(13px, 1.1vw, 15px)', letterSpacing: '0.26em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.8vh', marginTop: 'calc(0.5vh + 12px)' }}>A Complete Field Guide</div>
         <div style={{ width: '100%', display: 'flex', gap: 0, padding: '0 2vw', boxSizing: 'border-box', marginTop: '0.3vh' }}>
-          <div style={{ flex: '0 0 52%', fontStyle: 'italic', fontSize: 'clamp(13px, 1.5vw, 20px)', fontWeight: 300, color: faintText, lineHeight: 1.6, textAlign: 'right', paddingRight: 'clamp(16px, 3vw, 52px)' }}>
+          <div style={{ flex: '0 0 52%', fontStyle: 'italic', fontSize: 'clamp(15px, 1.5vw, 20px)', fontWeight: 300, color: faintText, lineHeight: 1.6, textAlign: 'right', paddingRight: 'clamp(16px, 3vw, 52px)' }}>
             <span style={{ color: goldDim }}>LifeView</span> is a way of living that brings happiness, connection, and meaning.
           </div>
           <div style={{ width: 1, background: goldBorder, flexShrink: 0 }} />
-          <div style={{ flex: 1, fontStyle: 'italic', fontSize: 'clamp(13px, 1.5vw, 20px)', fontWeight: 300, color: faintText, lineHeight: 1.6, paddingLeft: 'clamp(16px, 3vw, 52px)', textAlign: 'left' }}>
+          <div style={{ flex: 1, fontStyle: 'italic', fontSize: 'clamp(15px, 1.5vw, 20px)', fontWeight: 300, color: faintText, lineHeight: 1.6, paddingLeft: 'clamp(16px, 3vw, 52px)', textAlign: 'left' }}>
             <span style={{ color: goldDim }}>The Toolkit</span> is the how-to — where philosophy becomes practice.
           </div>
         </div>
