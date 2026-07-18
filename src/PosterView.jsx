@@ -223,7 +223,7 @@ function usePosterFrame(iframeRef, poster, extraCss, onMounted) {
       `<!doctype html><html><head><meta charset="utf-8">` +
         `<link rel="preconnect" href="https://fonts.googleapis.com">` +
         `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>` +
-        `<link href="${FONTS_HREF}" rel="stylesheet">` +
+        `<link id="lv-fonts" href="${FONTS_HREF}" rel="stylesheet">` +
         `<style>html,body{margin:0;padding:0;background:#0a0a0f}` +
         `body{touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}` +
         `.load{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;` +
@@ -322,12 +322,27 @@ function FlowFrame({ poster, w }) {
       const scheduleReveal = () => {
         if (revealed || revealScheduled) return;
         revealScheduled = true;
-        // fonts.ready (accessed now, after the poster's text exists and its
-        // fonts have been requested) resolves when they're in; the timer is
-        // the fallback if a font hangs
-        revealTimer = setTimeout(reveal, 1400);
-        if (doc.fonts && doc.fonts.ready) {
-          doc.fonts.ready.then(() => setTimeout(reveal, 60));
+        // hard cap: never hold the poster hostage to a slow font server
+        revealTimer = setTimeout(reveal, 2500);
+        // IMPORTANT: fonts.ready is vacuously resolved until the font
+        // STYLESHEET has loaded and registered its faces — wait for the link
+        // first, give layout a tick to request the actual font files, then
+        // await them
+        const afterCss = () => {
+          setTimeout(() => {
+            if (doc.fonts && doc.fonts.ready) {
+              doc.fonts.ready.then(() => setTimeout(reveal, 80));
+            } else {
+              reveal();
+            }
+          }, 50);
+        };
+        const link = doc.getElementById("lv-fonts");
+        if (!link || link.sheet) {
+          afterCss();
+        } else {
+          link.addEventListener("load", afterCss, { once: true });
+          link.addEventListener("error", () => reveal(), { once: true });
         }
       };
       const measure = () => {
