@@ -197,49 +197,6 @@ a {
   -webkit-touch-callout: none;
 }
 
-/* desktop pill back to the framework map — fades with the rest of the
-   chrome, so it never lingers over the artwork */
-.framework-pill {
-  position: fixed;
-  top: 50px;
-  left: 14px;
-  z-index: 60;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 9px 4px 7px;
-  border-radius: 999px;
-  background: rgba(10, 10, 15, 0.55);
-  border: 1px solid rgba(201, 168, 76, 0.3);
-  backdrop-filter: blur(6px);
-  cursor: pointer;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(232, 220, 196, 0.85);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease, border-color 0.2s ease;
-}
-
-.poster-stage.chrome-on .framework-pill {
-  opacity: 0.38;
-  pointer-events: auto;
-}
-
-.poster-stage.chrome-on .framework-pill:hover {
-  opacity: 1;
-  border-color: rgba(201, 168, 76, 0.6);
-}
-
-@media (pointer: coarse) {
-  .framework-pill {
-    display: none;
-  }
-}
-
 /* edge arrows for mouse users — touch users swipe */
 .deck-arrow {
   position: fixed;
