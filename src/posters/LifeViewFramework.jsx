@@ -232,7 +232,7 @@ function Lines({ leftRefs, rightRefs, containerRef, dividerRef, opacity, thickne
 
 const STEP = {
   fontFamily: "'Cormorant Garamond', serif",
-  fontSize: 'clamp(14px, 2.2vw, 32px)', fontWeight: 400,
+  fontSize: 'clamp(17px, 2.2vw, 32px)', fontWeight: 400,
   fontStyle: 'normal', color: dimText,
   lineHeight: 1.3,
 };
@@ -348,7 +348,7 @@ export default function LifeViewMaster() {
         } : undefined}
         style={{ display: 'flex', alignItems: 'baseline', gap: '1vw', marginBottom: '0.3vh', justifyContent: 'flex-end', cursor: slug ? 'pointer' : 'default' }}
       >
-        <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'normal', fontSize: 'clamp(16px, 2.6vw, 36px)', color: goldDim, fontWeight: 700, lineHeight: 1.2, textAlign: 'right', letterSpacing: '0.04em' }}>{title}</span>
+        <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'normal', fontSize: 'clamp(19px, 2.6vw, 36px)', color: goldDim, fontWeight: 700, lineHeight: 1.2, textAlign: 'right', letterSpacing: '0.04em' }}>{title}</span>
       </div>
     );
   };
@@ -359,15 +359,15 @@ export default function LifeViewMaster() {
       {/* HEADER */}
       <div style={{ textAlign: 'center', padding: '1.5vh 4vw 1vh', borderBottom: `1px solid ${goldBorder}`, position: 'relative', flexShrink: 0 }}>
         <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '55vw', height: '8vh', background: 'radial-gradient(ellipse at center top, rgba(201,168,76,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div style={{ fontSize: 'clamp(9px, 1.1vw, 15px)', letterSpacing: '0.32em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.5vh', fontFamily: "'Cinzel', serif", fontWeight: 300 }}>Higher Power Sedona</div>
+        <div style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.32em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.5vh', fontFamily: "'Cinzel', serif", fontWeight: 300 }}>Higher Power Sedona</div>
         <h1 style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: 'clamp(36px, 7vw, 80px)', fontWeight: 400, color: cream, margin: '0', lineHeight: 1.0 }}>LifeView</h1>
-        <div style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(9px, 1.1vw, 15px)', letterSpacing: '0.26em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.8vh', marginTop: '0.5vh' }}>A Complete Field Guide</div>
+        <div style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.26em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.8vh', marginTop: '0.5vh' }}>A Complete Field Guide</div>
         <div style={{ width: '100%', display: 'flex', gap: 0, padding: '0 2vw', boxSizing: 'border-box', marginTop: '0.3vh' }}>
-          <div style={{ flex: '0 0 52%', fontStyle: 'italic', fontSize: 'clamp(11px, 1.5vw, 20px)', fontWeight: 300, color: faintText, lineHeight: 1.6, textAlign: 'right', paddingRight: 'clamp(16px, 3vw, 52px)' }}>
+          <div style={{ flex: '0 0 52%', fontStyle: 'italic', fontSize: 'clamp(13px, 1.5vw, 20px)', fontWeight: 300, color: faintText, lineHeight: 1.6, textAlign: 'right', paddingRight: 'clamp(16px, 3vw, 52px)' }}>
             <span style={{ color: goldDim }}>LifeView</span> is a way of living that brings happiness, connection, and meaning.
           </div>
           <div style={{ width: 1, background: goldBorder, flexShrink: 0 }} />
-          <div style={{ flex: 1, fontStyle: 'italic', fontSize: 'clamp(11px, 1.5vw, 20px)', fontWeight: 300, color: faintText, lineHeight: 1.6, paddingLeft: 'clamp(16px, 3vw, 52px)', textAlign: 'left' }}>
+          <div style={{ flex: 1, fontStyle: 'italic', fontSize: 'clamp(13px, 1.5vw, 20px)', fontWeight: 300, color: faintText, lineHeight: 1.6, paddingLeft: 'clamp(16px, 3vw, 52px)', textAlign: 'left' }}>
             <span style={{ color: goldDim }}>The Toolkit</span> is the how-to — where philosophy becomes practice.
           </div>
         </div>
@@ -380,7 +380,7 @@ export default function LifeViewMaster() {
 
         {/* LEFT: FRAMEWORK */}
         <div style={{ flex: '0 0 52%', padding: '2vh 3vw 2vh 0', position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', textAlign: 'right' }}>
-          <div style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(9px, 1vw, 14px)', letterSpacing: '0.28em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.8vh', textAlign: 'right' }}>The LifeView Framework</div>
+          <div style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.28em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.8vh', textAlign: 'right' }}>The LifeView Framework</div>
 
           {/* S1: 3 items */}
           <div style={{ flex: 4, marginBottom: 0, paddingBottom: '1vh', borderBottom: `1px solid ${goldFaint}` }}>
@@ -429,7 +429,7 @@ export default function LifeViewMaster() {
 
         {/* RIGHT: TOOLKIT */}
         <div ref={dividerRef} style={{ flex: 1, padding: '2vh 0 2vh 3vw', borderLeft: `1px solid ${goldBorder}`, position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column' }}>
-          <div style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(9px, 1vw, 14px)', letterSpacing: '0.28em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.8vh' }}>The LifeView Toolkit</div>
+          <div style={{ fontFamily: "'Cinzel', serif", fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.28em', color: goldDim, textTransform: 'uppercase', marginBottom: '0.8vh' }}>The LifeView Toolkit</div>
 
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             {toolkitItems.map((item, idx) => (
@@ -445,7 +445,7 @@ export default function LifeViewMaster() {
               >
                 <div>
                   <div style={{ ...STEP, marginBottom: '0.2vh', color: activeTargets.includes(item.id) ? cream : dimText, transition: 'color 0.4s ease', fontWeight: activeTargets.includes(item.id) ? 600 : 400 }}>{item.label}</div>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(11px, 1.6vw, 22px)', fontStyle: 'italic', fontWeight: 300, color: activeTargets.includes(item.id) ? 'rgba(240,236,228,0.6)' : 'rgba(240,236,228,0.45)', lineHeight: 1.3, transition: 'color 0.4s ease' }}>{item.desc}</div>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(13px, 1.6vw, 22px)', fontStyle: 'italic', fontWeight: 300, color: activeTargets.includes(item.id) ? 'rgba(240,236,228,0.6)' : 'rgba(240,236,228,0.45)', lineHeight: 1.3, transition: 'color 0.4s ease' }}>{item.desc}</div>
                 </div>
               </div>
             ))}
@@ -456,7 +456,7 @@ export default function LifeViewMaster() {
       {/* SCRIPT PANEL */}
       <div style={{ width: '100%', padding: '0 4vw', boxSizing: 'border-box', flexShrink: 0 }}>
         <div style={{ borderTop: `1px solid ${goldBorder}`, borderBottom: `1px solid ${goldBorder}`, padding: '0.8vh 3.7vw', minHeight: '5.5vh', boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: 'clamp(12px, 1.6vw, 22px)', fontWeight: 300, color: cream, lineHeight: 1.6, textAlign: 'center', margin: 0 }}>
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: 'clamp(14px, 1.6vw, 22px)', fontWeight: 300, color: cream, lineHeight: 1.6, textAlign: 'center', margin: 0 }}>
             {ANCHOR_TEXT[activeAnchor]}
           </p>
         </div>
