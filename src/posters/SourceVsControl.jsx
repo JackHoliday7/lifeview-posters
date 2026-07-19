@@ -292,7 +292,7 @@ export default function SourceVsControl() {
           Two operating systems. Pick one.
         </div>
         <div style={{ fontSize: 'clamp(8px, 1vw, 10px)', letterSpacing: '0.22em', color: 'rgba(255,255,255,0.1)', textTransform: 'uppercase', fontFamily: "'Cormorant Garamond', serif", marginTop: '0.8vw' }}>
-          <a href="https://www.higherpowersedona.org" target="_top" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a>
+          <a href="https://www.higherpowersedona.org" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a>
         </div>
       </div>
     </div>

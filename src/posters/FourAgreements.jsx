@@ -119,7 +119,7 @@ const Poster = () => {
       {/* Footer */}
       <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
         <div style={{ fontSize: "clamp(12px, 1.6vw, 18px)", color: "rgba(255,255,255,0.2)", letterSpacing: "0.25em", textTransform: "uppercase", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300 }}>From Don Miguel Ruiz &#x2014; adapted for LifeView</div>
-        <div style={{ fontSize: "clamp(12px, 1.5vw, 16px)", color: "rgba(255,255,255,0.25)", marginTop: "clamp(4px, 0.6vh, 8px)", letterSpacing: "0.15em", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300 }}><a href="https://www.higherpowersedona.org" target="_top" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></div>
+        <div style={{ fontSize: "clamp(12px, 1.5vw, 16px)", color: "rgba(255,255,255,0.25)", marginTop: "clamp(4px, 0.6vh, 8px)", letterSpacing: "0.15em", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300 }}><a href="https://www.higherpowersedona.org" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></div>
       </div>
     </div>
   );

@@ -99,7 +99,7 @@ export default function FiveRhythms() {
       <div style={{ textAlign: "center", position: "relative", zIndex: 1, paddingTop: "clamp(8px, 1.5vh, 16px)", borderTop: "1px solid rgba(201,168,76,0.08)" }}>
         <div style={{ fontSize: "clamp(16px, 2.2vw, 24px)", color: "rgba(201,168,76,0.35)", fontStyle: "italic", fontWeight: 300, lineHeight: 1.5, marginBottom: "clamp(4px, 0.5vh, 8px)" }}>Let your body move through stuck emotions and return to aliveness.</div>
         <div style={{ fontSize: "clamp(12px, 1.6vw, 18px)", color: "rgba(255,255,255,0.2)", letterSpacing: "0.25em", textTransform: "uppercase", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300, marginBottom: "clamp(4px, 0.5vh, 8px)" }}>From Gabrielle Roth &#x2014; adapted for LifeView</div>
-        <div style={{ fontSize: "clamp(10px, 1.3vw, 14px)", color: "rgba(255,255,255,0.2)", letterSpacing: "0.18em", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300 }}><a href="https://www.higherpowersedona.org" target="_top" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></div>
+        <div style={{ fontSize: "clamp(10px, 1.3vw, 14px)", color: "rgba(255,255,255,0.2)", letterSpacing: "0.18em", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300 }}><a href="https://www.higherpowersedona.org" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></div>
       </div>
     </div>
   );

@@ -81,7 +81,7 @@ export default function T() {
       </div>
       <div style={{textAlign:"center",padding:"1.5vh 0 0.5vh"}}>
         <div style={{fontSize:"clamp(14px,1.8vw,22px)",color:"rgba(255,255,255,0.22)",fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontWeight:300,marginBottom:"0.5vh"}}>Heal yourself. Then your relationships. Then the world. In that order.</div>
-        <div style={{fontSize:"clamp(9px,1.1vw,12px)",color:"rgba(255,255,255,0.15)",letterSpacing:"0.25em",textTransform:"uppercase",fontFamily:"'Helvetica Neue',sans-serif",fontWeight:300}}><a href="https://www.higherpowersedona.org" target="_top" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></div>
+        <div style={{fontSize:"clamp(9px,1.1vw,12px)",color:"rgba(255,255,255,0.15)",letterSpacing:"0.25em",textTransform:"uppercase",fontFamily:"'Helvetica Neue',sans-serif",fontWeight:300}}><a href="https://www.higherpowersedona.org" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></div>
       </div>
     </div>
   );

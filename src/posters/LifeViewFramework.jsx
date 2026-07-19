@@ -501,7 +501,7 @@ export default function LifeViewMaster() {
         </div>
 
         {/* URL right-aligned */}
-        <span style={{ fontSize: 'clamp(8px, 0.7vw, 12px)', letterSpacing: '0.22em', color: 'rgba(201,168,76,0.4)', textTransform: 'uppercase', fontFamily: "'Cinzel', serif" }}><a href="https://www.higherpowersedona.org" target="_top" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></span>
+        <span style={{ fontSize: 'clamp(8px, 0.7vw, 12px)', letterSpacing: '0.22em', color: 'rgba(201,168,76,0.4)', textTransform: 'uppercase', fontFamily: "'Cinzel', serif" }}><a href="https://www.higherpowersedona.org" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></span>
 
       </div>
     </div>
