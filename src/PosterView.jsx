@@ -71,6 +71,10 @@ function attachGestures(target, { longPressHome }) {
   let wheelLock = 0;
 
   const nav = () => window.__lvNav || {};
+  // while the user is pinch-zoomed in, single-finger drags pan the zoomed
+  // view — they must not change slides or fire the long-press
+  const zoomedIn = () =>
+    window.visualViewport && window.visualViewport.scale > 1.05;
   const clearLp = () => {
     if (lpTimer) {
       clearTimeout(lpTimer);
@@ -86,10 +90,10 @@ function attachGestures(target, { longPressHome }) {
     startX = e.clientX;
     startY = e.clientY;
     clearLp();
-    if (longPressHome) {
+    if (longPressHome && !zoomedIn()) {
       lpTimer = setTimeout(() => {
         lpTimer = null;
-        if (active) nav().home?.();
+        if (active && !zoomedIn()) nav().home?.();
       }, LP_MS);
     }
   };
@@ -112,6 +116,7 @@ function attachGestures(target, { longPressHome }) {
     if (!active) return;
     active = false;
     clearLp();
+    if (zoomedIn()) return;
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
     if (Math.abs(dx) > SWIPE_MIN && Math.abs(dx) > 2 * Math.abs(dy)) {
@@ -225,7 +230,7 @@ function usePosterFrame(iframeRef, poster, extraCss, onMounted) {
         `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>` +
         `<link id="lv-fonts" href="${FONTS_HREF}" rel="stylesheet">` +
         `<style>html,body{margin:0;padding:0;background:#0a0a0f}` +
-        `body{touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}` +
+        `body{touch-action:pan-y pinch-zoom;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}` +
         `.load{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;` +
         `color:rgba(201,168,76,0.7);font:italic 300 44px 'Cormorant Garamond',Georgia,serif}` +
         (extraCss || "") +

@@ -188,10 +188,10 @@ a {
   }
 }
 
-/* gestures: vertical scroll stays native; horizontal swipes are ours.
-   long-press shouldn't select poster text. */
+/* gestures: vertical scroll and pinch-zoom stay native; horizontal swipes
+   are ours. long-press shouldn't select poster text. */
 .poster-stage {
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
