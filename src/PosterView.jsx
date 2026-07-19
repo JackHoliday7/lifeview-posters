@@ -69,6 +69,12 @@ function attachGestures(target, { longPressHome }) {
   let lastTouchDown = 0;
   let wheelAcc = 0;
   let wheelLock = 0;
+  // touch double-tap (native dblclick is unreliable on iOS)
+  let lastTapT = 0;
+  let lastTapX = 0;
+  let lastTapY = 0;
+  let activePointers = 0;
+  let multiTouch = false;
 
   const nav = () => window.__lvNav || {};
   // while the user is pinch-zoomed in, single-finger drags pan the zoomed
@@ -84,6 +90,13 @@ function attachGestures(target, { longPressHome }) {
 
   const down = (e) => {
     nav().poke?.(); // clicks/taps keep the chrome awake too
+    activePointers++;
+    if (activePointers > 1) {
+      // a second finger means pinch/multi-touch — never a tap or long-press
+      multiTouch = true;
+      clearLp();
+      lastTapT = 0;
+    }
     if (e.pointerType === "mouse" && e.button !== 0) return;
     if (e.pointerType !== "mouse") lastTouchDown = Date.now();
     active = true;
@@ -113,20 +126,41 @@ function attachGestures(target, { longPressHome }) {
     nav().home?.();
   };
   const up = (e) => {
+    activePointers = Math.max(0, activePointers - 1);
+    const wasMulti = multiTouch;
+    if (activePointers === 0) multiTouch = false;
     if (!active) return;
     active = false;
     clearLp();
-    if (zoomedIn()) return;
+    if (zoomedIn() || wasMulti) return;
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
     if (Math.abs(dx) > SWIPE_MIN && Math.abs(dx) > 2 * Math.abs(dy)) {
       if (dx < 0) nav().next?.();
       else nav().prev?.();
+      lastTapT = 0;
+      return;
+    }
+    // touch double-tap returns to the framework map (mirrors desktop
+    // double-click; touch-action already disables browser double-tap zoom)
+    if (e.pointerType !== "mouse" && longPressHome && Math.abs(dx) < 12 && Math.abs(dy) < 12) {
+      const now = Date.now();
+      if (now - lastTapT < 350 && Math.abs(e.clientX - lastTapX) < 40 && Math.abs(e.clientY - lastTapY) < 40) {
+        lastTapT = 0;
+        nav().home?.();
+      } else {
+        lastTapT = now;
+        lastTapX = e.clientX;
+        lastTapY = e.clientY;
+      }
     }
   };
   const cancel = () => {
+    activePointers = Math.max(0, activePointers - 1);
+    if (activePointers === 0) multiTouch = false;
     active = false;
     clearLp();
+    lastTapT = 0;
   };
   const wheel = (e) => {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
@@ -592,7 +626,8 @@ export default function PosterView() {
               Swipe left or right to move between posters
             </div>
             <div className="deck-hint-row">
-              Press and hold any poster to return to the framework map
+              Double-tap (or press and hold) any poster to return to the
+              framework map
             </div>
             <div className="deck-hint-row">
               On the map, press and hold any item to open its poster
