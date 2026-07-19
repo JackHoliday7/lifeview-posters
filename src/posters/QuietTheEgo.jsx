@@ -39,7 +39,7 @@ const Poster = () => {
         </div>
         <div style={{ textAlign: "center", position: "relative", paddingTop: "clamp(12px, 2vh, 20px)", borderTop: "1px solid rgba(220,190,150,0.08)" }}>
           <div style={{ fontSize: "clamp(18px, 2.6vw, 28px)", color: "rgba(220,200,170,0.5)", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontWeight: 300, lineHeight: 1.5, marginBottom: "clamp(8px, 1vh, 14px)", textShadow: "0 1px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.5)" }}>When you stop performing for the world, you finally meet yourself.</div>
-          <div style={{ fontSize: "clamp(10px, 1.3vw, 14px)", color: "rgba(255,255,255,0.25)", letterSpacing: "0.15em", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300, textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}>higherpowersedona.org</div>
+          <div style={{ fontSize: "clamp(10px, 1.3vw, 14px)", color: "rgba(255,255,255,0.25)", letterSpacing: "0.15em", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300, textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}><a href="https://www.higherpowersedona.org" target="_top" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></div>
         </div>
       </div>
     </div>

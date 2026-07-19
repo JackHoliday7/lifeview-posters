@@ -144,7 +144,7 @@ export default function ThreeKeys() {
         <div style={{ fontSize: "clamp(11px, 1.4vw, 16px)", color: "rgba(160,190,210,0.25)", letterSpacing: "0.3em", textTransform: "uppercase", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300, marginBottom: "clamp(4px, 0.5vh, 8px)" }}>
           From Dr. John Delony &#x2014; adapted for LifeView
         </div>
-        <div style={{ fontSize: "clamp(10px, 1.3vw, 14px)", color: "rgba(160,190,210,0.2)", letterSpacing: "0.18em", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300 }}>higherpowersedona.org</div>
+        <div style={{ fontSize: "clamp(10px, 1.3vw, 14px)", color: "rgba(160,190,210,0.2)", letterSpacing: "0.18em", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300 }}><a href="https://www.higherpowersedona.org" target="_top" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></div>
       </div>
     </div>
   );

@@ -147,7 +147,7 @@ export default function FourEnemies() {
         <div style={{ fontSize: "clamp(12px, 1.6vw, 18px)", color: "rgba(200,140,120,0.25)", letterSpacing: "0.25em", textTransform: "uppercase", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300, marginBottom: "clamp(4px, 0.5vh, 8px)" }}>
           From Don Juan via Carlos Castaneda &#x2014; adapted for LifeView
         </div>
-        <div style={{ fontSize: "clamp(10px, 1.3vw, 14px)", color: "rgba(200,140,120,0.2)", letterSpacing: "0.18em", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300 }}>higherpowersedona.org</div>
+        <div style={{ fontSize: "clamp(10px, 1.3vw, 14px)", color: "rgba(200,140,120,0.2)", letterSpacing: "0.18em", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 300 }}><a href="https://www.higherpowersedona.org" target="_top" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a></div>
       </div>
     </div>
   );

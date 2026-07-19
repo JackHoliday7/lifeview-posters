@@ -179,7 +179,7 @@ export default function SovereignHerosJourney() {
           color: accentFaint,
           textTransform: 'uppercase',
         }}>
-          higherpowersedona.org
+          <a href="https://www.higherpowersedona.org" target="_top" style={{ color: "inherit", textDecoration: "none" }}>higherpowersedona.org</a>
         </div>
       </div>
     </div>
