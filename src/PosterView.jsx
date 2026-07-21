@@ -467,6 +467,63 @@ function FlowFrame({ poster, w }) {
   );
 }
 
+// Touch/phone "direct" mode renders the poster straight into the page (no iframe).
+// Without a gate the header paints in a fallback font and swaps ~1s later (FOUT). So we
+// keep an opaque cover over it until the poster's code has loaded AND its web fonts have
+// actually finished, then fade it in fully-typeset. A hard timeout guarantees it never
+// stays hidden if a font server is slow.
+function DirectPoster({ poster }) {
+  const { Component } = poster;
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    setReady(false);
+    let done = false;
+    const reveal = () => {
+      if (done) return;
+      done = true;
+      setReady(true);
+    };
+    const cap = setTimeout(reveal, 3000); // never hold the poster hostage to a slow font server
+    Promise.resolve(poster.load ? poster.load() : null).then(() => {
+      // component code is loaded → let it paint (and request its fonts) for a couple of
+      // frames, then wait for the fonts themselves to finish before revealing.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(() => setTimeout(reveal, 80));
+          } else {
+            reveal();
+          }
+        }),
+      );
+    });
+    return () => clearTimeout(cap);
+  }, [poster.slug]);
+
+  return (
+    <>
+      <div style={{ opacity: ready ? 1 : 0, transition: "opacity 0.3s ease" }}>
+        <Suspense fallback={null}>
+          <Component />
+        </Suspense>
+      </div>
+      {!ready && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "#0a0a0f",
+            zIndex: 6,
+            pointerEvents: "none",
+          }}
+        >
+          <Loading poster={poster} />
+        </div>
+      )}
+    </>
+  );
+}
+
 export default function PosterView() {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -592,7 +649,6 @@ export default function PosterView() {
 
   if (!poster) return <Navigate to="/" replace />;
 
-  const { Component } = poster;
   return (
     <div className={"poster-stage" + (chromeOn ? " chrome-on" : "")} ref={stageRef}>
       <button
@@ -612,11 +668,7 @@ export default function PosterView() {
       <div key={poster.slug} className="slide-fade">
         {mode === "frame" && <PortraitFrame poster={poster} w={w} h={h} />}
         {mode === "flow" && <FlowFrame poster={poster} w={w} />}
-        {mode === "direct" && (
-          <Suspense fallback={<Loading poster={poster} />}>
-            <Component />
-          </Suspense>
-        )}
+        {mode === "direct" && <DirectPoster poster={poster} />}
       </div>
       {showHint && coarse && (
         <div className="deck-hint" onClick={dismissHint}>
