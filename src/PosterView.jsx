@@ -502,7 +502,9 @@ function DirectPoster({ poster }) {
 
   return (
     <>
-      <div style={{ opacity: ready ? 1 : 0, transition: "opacity 0.3s ease" }}>
+      {/* .direct-wrap: the mobile grow-and-scroll CSS must reach the poster
+          root THROUGH this fade wrapper (see index.css) */}
+      <div className="direct-wrap" style={{ opacity: ready ? 1 : 0, transition: "opacity 0.3s ease" }}>
         <Suspense fallback={null}>
           <Component />
         </Suspense>
