@@ -90,7 +90,7 @@ const ANCHOR_LABELS = {
   progress:      'Make Daily Progress',
   train:         'Train Daily',
   gifts:         'Discover Your Gifts',
-  souls:         'Like-minded Souls',
+  souls:         'Find Your People',
   victory:       'Celebrate Victory',
 };
 
@@ -420,7 +420,7 @@ export default function LifeViewMaster() {
               <Step right id="commit" label="Commit to Healing"              dotColor="rgba(201,168,76,0.9)" />
               <Step right id="gifts" label="Discover Your Gifts"            dotColor="rgba(201,168,76,0.9)" />
               <Step right id="progress" label="Make Daily Progress"            dotColor="rgba(201,168,76,0.9)" />
-              <Step right id="souls" label="Connect with Like-minded Souls" dotColor="rgba(201,168,76,0.9)" />
+              <Step right id="souls" label="Find Your People" dotColor="rgba(201,168,76,0.9)" />
               <Step right id="train" label="Train Daily"                    dotColor="rgba(201,168,76,0.9)" />
               <Step right id="victory" label="Celebrate Victory"              dotColor="rgba(201,168,76,0.9)" />
             </div>
