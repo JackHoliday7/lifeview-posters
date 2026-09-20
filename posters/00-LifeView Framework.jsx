@@ -64,7 +64,7 @@ const connections = [
 
 const toolkitItems = [
   { id: 'three-zones',      label: 'The Three Zones',      desc: 'Know what state your nervous system is in' },
-  { id: 'three-keys',       label: 'The Three Keys',       desc: 'Boundaries, regulation, and forgiveness' },
+  { id: 'three-keys',       label: 'The Three Keys',       desc: 'Clear communication for relationship success' },
   { id: 'four-horsemen',    label: 'The Four Horsemen',    desc: 'Four patterns that destroy relationships' },
   { id: 'four-agreements',  label: 'The Four Agreements',  desc: 'A personal code for living with integrity' },
   { id: 'four-enemies',     label: 'The Four Enemies',     desc: 'What blocks your path to sovereignty' },
