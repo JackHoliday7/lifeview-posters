@@ -17,6 +17,9 @@ const connections = [
   { from: 'personal',      to: 'three-zones',     color: S1 },
   { from: 'personal',      to: 'five-parts',       color: S1 },
   { from: 'personal',      to: 'five-rhythms',     color: S1 },
+  // Self-regulation is the ground everything relational stands on: you cannot self-regulate
+  // without knowing which zone you're in (Rob, 2026-09-21 — "that's key to self control").
+  { from: 'interpersonal', to: 'three-zones',      color: S1 },
   { from: 'interpersonal', to: 'three-keys',       color: S1 },
   { from: 'interpersonal', to: 'four-horsemen',    color: S1 },
   { from: 'interpersonal', to: 'four-agreements',  color: S1 },
